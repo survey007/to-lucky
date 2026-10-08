@@ -848,7 +848,8 @@ body {
 .video-title {
     margin: 0;
     padding: 0 0.2em;
-    font-size: clamp(2rem, 9vw, 5rem);
+    /* 缩小一档：原来是 clamp(2rem, 9vw, 5rem)，蛋糕板块在宽屏上会顶到 5rem 显得过大 */
+    font-size: clamp(1.4rem, 5.5vw, 3.2rem);
     font-weight: 700;
     line-height: 1.15;
     letter-spacing: 0.05em;
