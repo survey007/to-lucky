@@ -1,0 +1,1265 @@
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    overflow: hidden;
+    background-color: #000;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+/* 星空背景 */
+.starry-sky-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#starry-sky {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* 内容容器 */
+.content-container {
+    position: relative;
+    z-index: 10;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.main-content {
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+/* 生日模式下允许滚动 */
+#birthday-container {
+    height: auto;
+    max-height: 100vh;
+    overflow-y: auto;
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.2);
+    scroll-snap-type: y mandatory;
+    background-color: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+    border: none;
+}
+
+#birthday-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+#birthday-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+#birthday-container::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+/* 全屏部分样式 */
+.fullscreen-section {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    scroll-snap-align: start;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#greeting-section {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(76, 0, 130, 0.5));
+}
+
+#love-tree-section {
+    background: linear-gradient(to bottom, rgba(76, 0, 130, 0.5), rgba(148, 0, 211, 0.5));
+}
+
+#wishes-section {
+    background: linear-gradient(to bottom, rgba(148, 0, 211, 0.5), rgba(255, 0, 255, 0.5));
+}
+
+/* 顺序：许愿 → 蛋糕 → 玫瑰，渐变依次衔接，避免相邻 section 之间出现黑带 */
+#cake-section {
+    background: linear-gradient(to bottom, rgba(255, 0, 255, 0.5), rgba(148, 0, 90, 0.6));
+}
+
+#rose-section {
+    background: linear-gradient(to bottom, rgba(148, 0, 90, 0.6), rgba(0, 0, 0, 0.7));
+}
+
+/* 标题样式 */
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.birthday-title {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    margin: 30px 0 20px;
+    color: #ff7eb3;
+    text-shadow: 0 0 8px rgba(255, 126, 179, 0.5);
+}
+
+/* 倒计时样式 */
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-value {
+    font-size: 3.5rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #6b73ff 0%, #ff7eb3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    display: block;
+    min-width: 80px;
+    position: relative;
+}
+
+.time-value:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    position: absolute;
+    bottom: 0;
+}
+
+.time-label {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: #ccc;
+}
+
+.love-message {
+    font-size: 1.2rem;
+    font-family: 'Dancing Script', cursive;
+    margin-top: 20px;
+    opacity: 0.9;
+}
+
+/* 生日祝福样式 */
+.birthday-message {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    max-width: 800px;
+    width: 100%;
+    margin: 20px auto;
+}
+
+.large-text {
+    font-size: 2rem;
+    font-family: 'Dancing Script', cursive;
+    margin-bottom: 20px;
+    color: #ff7eb3;
+}
+
+.message-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.message-signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    text-align: right;
+    margin-top: 20px;
+}
+
+/* 漂浮爱心 */
+.floating-hearts {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 显示隐藏 */
+.hidden {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* 封面页（倒计时）的声音提示
+   iOS Safari 不允许无手势自动播放，必须在用户点一下之前提示他 */
+.sound-hint {
+    position: fixed;
+    right: 20px;
+    bottom: 86px;
+    z-index: 101;
+    max-width: 52vw;
+    padding: 9px 14px;
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 12.5px;
+    line-height: 1.45;
+    letter-spacing: 0.03em;
+    text-align: right;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    animation: sound-hint-in 0.6s ease both;
+}
+
+/* 箭头指向右下角的 ♪ 按钮 */
+.sound-hint::after {
+    content: '';
+    position: absolute;
+    right: 18px;
+    bottom: -7px;
+    width: 12px;
+    height: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.16);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    transform: rotate(45deg);
+}
+
+.sound-hint.hidden {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+@keyframes sound-hint-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* 音乐播放器 */
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+/* 自动播放被拦时的提示（iOS 需要用户主动点一下） */
+#music-hint {
+    position: fixed;
+    right: 20px;
+    bottom: 84px;
+    z-index: 101;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+    animation: music-hint-in 0.4s ease;
+}
+
+@keyframes music-hint-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.music-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.music-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.music-icon {
+    display: inline-block;
+    animation: rotate 3s linear infinite;
+}
+
+/* 烟花容器 */
+.fireworks-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+#fireworks-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* 礼物盒样式 */
+.gift-section {
+    margin: 30px auto;
+    max-width: 200px;
+    perspective: 1000px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.gift-box {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d;
+    animation: giftFloat 3s ease-in-out infinite;
+}
+
+.gift-box-body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff7eb3, #ff758c);
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.gift-lid {
+    position: absolute;
+    width: 110%;
+    height: 30px;
+    background: linear-gradient(135deg, #ff7eb3, #ff758c);
+    top: -30px;
+    left: -5%;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s ease;
+    transform-origin: bottom;
+}
+
+.gift-ribbon {
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    background: #fff;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.gift-ribbon:before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    background: #fff;
+    transform: rotate(90deg);
+    top: 0;
+    left: 0;
+}
+
+.gift-tag {
+    position: absolute;
+    bottom: -30px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 1rem;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.gift-box.opened .gift-lid {
+    transform: rotateX(-80deg);
+}
+
+.gift-section.opened {
+    transform: scale(0);
+    opacity: 0;
+}
+
+/* 礼物内容区域 */
+.birthday-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1s ease;
+}
+
+.birthday-content.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 5000px;
+}
+
+/* 互动爱心树 */
+.love-tree-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tree-instruction {
+    color: #ccc;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+#love-tree {
+    max-width: 90%;
+    height: auto;
+    max-height: 60vh;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* 互动祝福卡片 */
+.wishes-container {
+    width: 100%;
+    max-width: 800px;
+}
+
+.wishes-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.wish-card {
+    width: 200px;
+    height: 150px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.wish-card-front, .wish-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.6s;
+    padding: 20px;
+    text-align: center;
+}
+
+.wish-card-front {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    font-size: 1.2rem;
+}
+
+.wish-card-back {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+.wish-card.flipped .wish-card-front {
+    transform: rotateY(180deg);
+}
+
+.wish-card.flipped .wish-card-back {
+    transform: rotateY(0deg);
+}
+
+/* 心愿许愿区 - 优化 */
+.wish-maker {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 30px;
+}
+
+.cake-container {
+    margin: 30px auto;
+    width: 150px;
+    height: 200px;  /* 增加高度容纳提示语 */
+    position: relative;
+}
+
+.cake {
+    width: 150px;
+    height: 80px;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cake:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    top: 20px;
+    border-radius: 10px;
+}
+
+.candle {
+    position: absolute;
+    width: 10px;
+    height: 30px;
+    background: #fff;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+
+.flame {
+    position: absolute;
+    width: 15px;
+    height: 30px;
+    background: #ff7800;
+    border-radius: 50% 50% 20% 20%;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: blur(3px);
+    animation: flicker 0.5s ease-in-out infinite alternate;
+}
+
+/* 许愿结果样式 - 新增 */
+.wish-result {
+    position: absolute;
+    width: 200px;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    margin-top: 20px;
+    opacity: 0;
+    transition: all 0.8s ease;
+}
+
+.wish-success {
+    background: linear-gradient(135deg, #ffb347, #ffcc33);
+    color: #fff;
+    padding: 15px;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    box-shadow: 0 5px 20px rgba(255, 204, 51, 0.4);
+    animation: appear 0.8s ease forwards, float 3s ease-in-out infinite;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.wish-button {
+    padding: 12px 25px;
+    background: #ff7eb3;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 126, 179, 0.3);
+}
+
+.wish-button:hover {
+    background: #ff5ba7;
+    transform: translateY(-3px);
+}
+
+.wish-button:active {
+    transform: translateY(0);
+}
+
+.wish-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 视频板块（生日蛋糕 / 粒子玫瑰）
+   iOS Safari 适配要点：
+   1) 用 100svh 而非 100vh —— Safari 地址栏收起/展开时 100vh 会大于可视高度，
+      section 比屏幕高，视频跟着溢出（"超出屏幕"的一个成因）。
+      svh = small viewport height，取地址栏展开时的稳定高度，滚动时不跳动。
+   2) 视频用 inset:0 + 明确的 width/height，而不是 50%+translate 居中：
+      Safari 上 flex 子项里的百分比高度可能解析失败，回退成视频原生高度导致溢出。
+   3) 竖屏手机下让视频盒取"素材自身比例"（--video-ar），配合 object-fit: contain，
+      整幅画面完整可见、不裁切、不超出屏幕。 */
+.video-section {
+    position: relative;
+    overflow: hidden;
+    /* 视频本身铺满，标题叠加在画面上，所以收紧内边距 */
+    padding: 0;
+    min-height: 100vh; /* 老 Safari 回退 */
+    min-height: 100svh;
+    height: auto;
+}
+
+.video-section .section-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -o-object-fit: cover;
+    object-position: center center;
+    pointer-events: none;
+    background-color: #000;
+    z-index: 0;
+    /* iOS Safari 需要显式声明，否则某些版本会按静态 inline 元素参与布局 */
+    display: block;
+}
+
+/* 蛋糕是 720x924 的竖屏素材。横屏桌面按 cover 铺满必须放大到视口宽度，
+   画面会被裁掉约 64%（蜡烛、蛋糕顶、花体字全部看不见），这就是"蛋糕过于大"的原因。
+   所以蛋糕在所有比例下都用 contain 完整显示，留白由模糊背景视频填充。
+   提升优先级以覆盖下方竖屏媒体查询里的统一规则。 */
+#cake-section .section-video {
+    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* 用视口单位而不是 100%：绝对定位元素上的百分比高度依赖包含块高度可解析，
+       某些老版本 Safari 会解析失败并回退成素材原生高度，导致溢出 */
+    height: 100vh;
+    height: 100svh;
+    max-height: none;
+    aspect-ratio: auto;
+    transform: none;
+    object-fit: contain;
+    -o-object-fit: contain;
+    background-color: transparent;
+    z-index: 2;
+}
+
+/* 蛋糕用 contain 后上下/左右会出现留白区。纯色留白 + 深色视频会形成明显的"贴片"边界，
+   所以：
+   1) 在 section 内放一份模糊放大的同源视频铺满背景（.video-backdrop），
+      留白区由它填充 —— 就是 iOS / YouTube 处理比例不匹配视频的标准做法；
+   2) 再叠一层左右渐变把边界进一步揉开。
+   z-index：backdrop 0 < 渐变 1 < 视频 2 < 标题 3。 */
+
+/* 模糊背景视频：放大到溢出裁切，再模糊 */
+#cake-section .video-backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    -o-object-fit: cover;
+    /* 放大一点再做模糊，避免模糊后四周露出清晰边缘 */
+    transform: scale(1.12);
+    transform-origin: center center;
+    filter: blur(32px) saturate(1.25) brightness(0.55);
+    -webkit-filter: blur(32px) saturate(1.25) brightness(0.55);
+    pointer-events: none;
+    background-color: transparent;
+    z-index: 0;
+}
+
+/* 主体视频在模糊底之上完整显示（完整规则见上方 #cake-section .section-video） */
+
+#cake-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(to right,
+            rgba(196, 0, 186, 0.28) 0%,
+            rgba(196, 0, 186, 0.10) 6%,
+            rgba(196, 0, 186, 0) 18%,
+            rgba(196, 0, 186, 0) 82%,
+            rgba(196, 0, 186, 0.10) 94%,
+            rgba(196, 0, 186, 0.28) 100%);
+}
+
+/* 标题浮在最上层 */
+#cake-section .video-caption {
+    z-index: 3;
+}
+
+.video-caption {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 92vw;
+    margin: 0 auto;
+    padding: 0 4vw;
+    /* 避开 iPhone 刘海与底部小黑条 */
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    text-align: center;
+    pointer-events: none;
+}
+
+/* 竖屏（手机）：视频盒严格按素材比例收缩到屏幕内，画面完整不裁切
+   --video-ar 由各 section 的 data-video-ar 提供（蛋糕 720/924，玫瑰 884/476） */
+@media screen and (max-aspect-ratio: 3/4) {
+    .video-section .section-video {
+        inset: auto;
+        top: 50%;
+        left: 50%;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100svh;
+        aspect-ratio: var(--video-ar, 9 / 16);
+        transform: translate(-50%, -50%);
+        /* contain：整幅画面（含蜡烛火苗、花体字）都在屏幕内，绝不裁切 */
+        object-fit: contain;
+        -o-object-fit: contain;
+    }
+
+    /* 玫瑰的例外处理见下方 @media (orientation: portrait) */
+}
+
+/* 竖屏通用（含 iPad 竖屏）：玫瑰是 884x476 的横屏素材，
+   按素材比例 contain 放进竖屏只有很矮一条，画面太小。
+   改为 cover 放大铺满，只裁掉左右两侧（画面主体居中），观感最好。 */
+@media screen and (orientation: portrait) {
+    #rose-section .section-video {
+        inset: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100svh;
+        max-height: none;
+        aspect-ratio: auto;
+        transform: none;
+        object-fit: cover;
+        -o-object-fit: cover;
+    }
+}
+
+/* 玫瑰板块已去除全部文字，因此不需要为标题可读性加暗罩，
+   让粒子画面以原始亮度呈现。 */
+
+.video-title {
+    margin: 0;
+    padding: 0 0.2em;
+    font-size: clamp(2rem, 9vw, 5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: 0.05em;
+    color: transparent;
+    background-image: linear-gradient(120deg,
+            #ff6ec7 0%,
+            #ffa8c0 20%,
+            #ffd1a8 40%,
+            #ffe29f 55%,
+            #c2f0c2 70%,
+            #a0d8ff 85%,
+            #ff9ad2 100%);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: video-shine 6s ease-in-out infinite;
+    filter: drop-shadow(0 6px 26px rgba(255, 110, 199, 0.25)) drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
+}
+
+@keyframes video-shine {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.video-sub {
+    margin-top: 1rem;
+    font-size: clamp(0.9rem, 3.4vw, 1.35rem);
+    color: rgba(255, 228, 240, 0.92);
+    letter-spacing: 0.08em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+}
+
+/* 蛋糕板块沿用素材的粉色脉冲标题 */
+.cake-title {
+    color: #ff3caa;
+    background-image: none;
+    -webkit-text-fill-color: currentColor;
+    text-shadow:
+        0 0 18px rgba(255, 60, 170, 0.55),
+        0 2px 12px rgba(0, 0, 0, 0.45);
+    animation: cake-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes cake-pulse {
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+
+    50% {
+        transform: scale(1.04);
+        filter: brightness(1.12);
+        text-shadow:
+            0 0 30px rgba(255, 110, 199, 0.85),
+            0 2px 12px rgba(0, 0, 0, 0.45);
+    }
+
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+.cake-sub {
+    color: rgba(255, 228, 240, 0.95);
+}
+
+.video-wish {
+    margin-top: 0.6rem;
+    font-size: clamp(0.85rem, 3.1vw, 1.15rem);
+    color: rgba(255, 210, 225, 0.85);
+    letter-spacing: 0.12em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* 动画效果 */
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff7eb3, 0 0 20px #ff7eb3;
+    }
+    to {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff7eb3, 0 0 40px #ff7eb3;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes giftFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes flicker {
+    0%, 100% {
+        opacity: 1;
+        height: 30px;
+    }
+    50% {
+        opacity: 0.8;
+        height: 25px;
+    }
+}
+
+/* 心跳效果 */
+.heartbeat {
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+    14% {
+        transform: scale(1.1);
+    }
+    28% {
+        transform: scale(1);
+    }
+    42% {
+        transform: scale(1.1);
+    }
+    70% {
+        transform: scale(1);
+    }
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .title {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+    
+    .countdown-timer {
+        gap: 10px;
+    }
+    
+    .time-value {
+        font-size: 2.5rem;
+        min-width: 60px;
+    }
+    
+    .time-label {
+        font-size: 0.8rem;
+    }
+    
+    .main-content {
+        padding: 25px;
+    }
+    
+    .large-text {
+        font-size: 1.6rem;
+    }
+    
+    .message-content {
+        font-size: 1rem;
+    }
+    
+    .message-signature {
+        font-size: 1.3rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .wish-card {
+        width: 150px;
+        height: 120px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .countdown-timer {
+        gap: 5px;
+    }
+    
+    .time-value {
+        font-size: 2rem;
+        min-width: 50px;
+    }
+    
+    .main-content {
+        padding: 20px;
+    }
+    
+    .love-message {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+    
+    .gift-box {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .wish-card {
+        width: 140px;
+        height: 110px;
+    }
+    
+    .wish-success {
+        font-size: 1rem;
+        padding: 10px;
+    }
+}
+
+/* 滚动指示器 */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    z-index: 100;
+    opacity: 0; /* 默认不可见 */
+    visibility: hidden; /* 默认隐藏 */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    pointer-events: none; /* 默认不可点击 */
+}
+
+/* 滚动指示器可见状态 */
+.scroll-indicator-visible {
+    opacity: 0.7;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.scroll-indicator:before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-right: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    transform: rotate(45deg) translateY(-4px);
+    animation: arrow-down 1.5s infinite;
+}
+
+.scroll-indicator:after {
+    content: '向下滑动';
+    position: absolute;
+    bottom: -25px;
+    font-size: 12px;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+.scroll-indicator:hover:after {
+    opacity: 0.8;
+}
+
+@keyframes arrow-down {
+    0% {
+        transform: rotate(45deg) translateY(-4px);
+        opacity: 0.5;
+    }
+    50% {
+        transform: rotate(45deg) translateY(2px);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(45deg) translateY(-4px);
+        opacity: 0.5;
+    }
+}
+
+/* 生日提示样式 */
+.birthday-reminder {
+    margin-top: 30px;
+    padding: 15px 20px;
+    background-color: rgba(255, 126, 179, 0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 126, 179, 0.3);
+    animation: gentle-pulse 3s infinite alternate;
+    backdrop-filter: blur(5px);
+    transition: all 0.5s ease;
+}
+
+/* 生日即将到来时的特殊效果 */
+.birthday-reminder.coming-soon {
+    background-color: rgba(255, 126, 179, 0.3);
+    border: 1px solid rgba(255, 126, 179, 0.6);
+    animation: excited-pulse 1.5s infinite alternate;
+    transform: scale(1.05);
+}
+
+.coming-soon .reminder-icon {
+    animation: excited-float 1s ease-in-out infinite;
+}
+
+.coming-soon .reminder-text {
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.coming-soon .reminder-text strong {
+    color: #ffff00;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.reminder-icon {
+    font-size: 1.8rem;
+    margin-right: 15px;
+    animation: float-icon 2s ease-in-out infinite;
+    display: inline-block;
+}
+
+.reminder-text {
+    font-size: 1.1rem;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+@keyframes gentle-pulse {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 126, 179, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(255, 126, 179, 0.4);
+    }
+}
+
+@keyframes excited-pulse {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 126, 179, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 30px rgba(255, 126, 179, 0.7);
+    }
+}
+
+@keyframes float-icon {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes excited-float {
+    0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(-8px) rotate(5deg);
+    }
+} 
